@@ -4,6 +4,7 @@
 # Pairs with skill-observer.sh (PreToolUse) to complete the observation picture
 
 set -e
+umask 077
 
 LOG_FILE="$HOME/.claude/debug/skill-outcomes.jsonl"
 mkdir -p "$(dirname "$LOG_FILE")" 2>/dev/null

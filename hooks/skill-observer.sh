@@ -4,6 +4,7 @@
 # PreToolUse hook: always allows, just logs
 
 set -e
+umask 077
 
 LOG_FILE="$HOME/.claude/debug/skill-usage.jsonl"
 mkdir -p "$(dirname "$LOG_FILE")" 2>/dev/null
@@ -17,11 +18,12 @@ if [[ "$TOOL_NAME" == "Skill" ]]; then
     SKILL_ARGS=$(echo "$HOOK_INPUT" | jq -r '.tool_input.args // ""' 2>/dev/null || echo "")
     TIMESTAMP=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
 
-    # Append to JSONL log (one JSON object per line)
-    printf '{"ts":"%s","skill":"%s","args":"%s"}\n' \
-        "$TIMESTAMP" \
-        "$SKILL_NAME" \
-        "$(echo "$SKILL_ARGS" | tr '"' "'" | tr '\n' ' ')" \
+    # Build JSON safely using jq (not printf) to prevent injection
+    jq -n \
+        --arg ts "$TIMESTAMP" \
+        --arg skill "$SKILL_NAME" \
+        --arg args "$SKILL_ARGS" \
+        '{ts: $ts, skill: $skill, args: $args}' \
         >> "$LOG_FILE" 2>/dev/null
 fi
 

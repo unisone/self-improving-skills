@@ -4,6 +4,7 @@
 # Triggers on: startup, resume, clear, compact
 
 set -e
+umask 077
 
 USAGE_LOG="$HOME/.claude/debug/skill-usage.jsonl"
 OUTCOMES_LOG="$HOME/.claude/debug/skill-outcomes.jsonl"
@@ -15,10 +16,15 @@ INVOCATIONS_THRESHOLD=50  # Remind after 50 skill uses since last audit
 
 # Initialize marker if missing
 if [[ ! -f "$AUDIT_MARKER" ]]; then
-    echo "0" > "$AUDIT_MARKER"  # epoch 0 = never audited
+    echo "0" > "$AUDIT_MARKER"
 fi
 
 LAST_AUDIT_EPOCH=$(cat "$AUDIT_MARKER" 2>/dev/null || echo "0")
+# Validate numeric to prevent bash arithmetic injection
+if ! [[ "$LAST_AUDIT_EPOCH" =~ ^[0-9]+$ ]]; then
+    LAST_AUDIT_EPOCH=0
+fi
+
 NOW_EPOCH=$(date +%s)
 DAYS_SINCE=$(( (NOW_EPOCH - LAST_AUDIT_EPOCH) / 86400 ))
 
