@@ -25,6 +25,16 @@ Inspired by [@tricalt's viral post](https://x.com/tricalt/status/203217988727706
 
 ## Quick Install
 
+### Option A: Claude Code plugin (recommended)
+
+```
+/plugin install self-improving-skills@unisone/self-improving-skills
+```
+
+Hooks register automatically through the plugin. No `settings.json` editing needed.
+
+### Option B: Install script
+
 ```bash
 git clone https://github.com/unisone/self-improving-skills.git
 cd self-improving-skills
@@ -229,3 +239,4 @@ DATA FLOW:
 ## License
 
 MIT
+

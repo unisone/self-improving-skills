@@ -1,0 +1,43 @@
+{
+  "description": "Self-improving skills observation hooks (OBSERVE layer + audit reminders)",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/skill-observer.sh",
+            "timeout": 5,
+            "statusMessage": "Tracking skill usage..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/skill-outcome-observer.sh",
+            "timeout": 5,
+            "statusMessage": "Recording skill outcome..."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/skill-audit-reminder.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
