@@ -21,6 +21,7 @@ Inspired by [@tricalt's viral post](https://x.com/tricalt/status/203217988727706
 | **AMEND** | `improve-skill.md` | Slash command | Evidence-based amendments with backups |
 | **AMEND** | `skill-rollback.md` | Slash command | Undo amendments, restore versions |
 | **EVALUATE** | `skill-evaluate.md` | Slash command | Pre/post comparison, verdict |
+| **BOOTSTRAP** | `bootstrap-skill.md` | Slash command | Scaffold a new skill from a task description |
 | **AUTOMATE** | `skill-audit-reminder.sh` | SessionStart hook | Nudges when audit is overdue |
 
 ## Quick Install
@@ -239,4 +240,5 @@ DATA FLOW:
 ## License
 
 MIT
+
 
