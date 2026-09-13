@@ -1,7 +1,7 @@
 {
   "name": "self-improving-skills",
-  "version": "1.1.0",
-  "description": "Closed-loop system that makes Claude Code skills self-improving: Observe, Inspect, Amend, Evaluate. Hooks track every skill invocation; slash commands audit health, fix degradation, and verify improvements.",
+  "version": "1.2.0",
+  "description": "Closed-loop system that makes Claude Code skills self-improving: Observe, Inspect, Amend, Evaluate. Hooks track every skill invocation; slash commands audit health, fix degradation, verify improvements, and bootstrap new skills.",
   "author": {
     "name": "unisone",
     "url": "https://github.com/unisone"
